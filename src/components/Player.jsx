@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-// import previous from "src/assets/playerbuttons/Previous.png";
+import shuffle from "../assets/playerbuttons/Shuffle.png";
+import previous from "../assets/playerbuttons/Previous.png";
+import play from "../assets/playerbuttons/Play.png";
+import next from "../assets/playerbuttons/Next.png";
+import repeat from "../assets/playerbuttons/Repeat.png";
 
 const Player = () => {
   return (
@@ -11,27 +15,27 @@ const Player = () => {
               <div className="row justify-content-center">
                 <div className="col-auto">
                   <Link href="#a">
-                    <img src="playerbuttons/Shuffle.png" alt="shuffle" />
+                    <img src={shuffle} alt="shuffle" />
                   </Link>
                 </div>
                 <div className="col-auto">
                   <Link href="#a">
-                    <img src="playerbuttons/Previous.png" alt="previous" />
+                    <img src={previous} alt="previous" />
                   </Link>
                 </div>
                 <div className="col-auto">
                   <Link href="#a">
-                    <img src="playerbuttons/Play.png" alt="play" />
+                    <img src={play} alt="play" />
                   </Link>
                 </div>
                 <div className="col-auto">
                   <Link href="#a">
-                    <img src="playerbuttons/Next.png" alt="next" />
+                    <img src={next} alt="next" />
                   </Link>
                 </div>
                 <div className="col-auto">
                   <Link href="#a">
-                    <img src="playerbuttons/Repeat.png" alt="repeat" />
+                    <img src={repeat} alt="repeat" />
                   </Link>
                 </div>
               </div>

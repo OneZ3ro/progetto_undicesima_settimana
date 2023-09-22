@@ -73,16 +73,15 @@ const VerticalSidebar = () => {
               <ul>
                 <li>
                   <Link className="nav-item nav-link" to={"/"}>
-                    <i className="fas fa-home fa-lg"></i>&nbsp; Home
+                    <i className="fa fa-home fa-lg"></i>&nbsp; Home
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-item nav-link" href="#a">
-                    <i className="fas fa-book-open fa-lg"></i>&nbsp; Your
-                    Library
+                    <i class="fa fa-folder-open fa-lg"></i>&nbsp; Your Library
                   </Link>
                 </li>
-                <li>
+                <li style={{ paddingBlock: "8px" }}>
                   <Form onSubmit={search}>
                     <InputGroup>
                       <Form.Control

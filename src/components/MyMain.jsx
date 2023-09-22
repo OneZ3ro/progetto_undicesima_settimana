@@ -1,10 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getHipHopAction, getPopAction, getRockAction } from "../redux/actions";
 import { useEffect } from "react";
+import SongInfoPage from "./SongInfoPage";
+import { Spinner } from "react-bootstrap";
 
 const MyMain = () => {
   const dispatch = useDispatch();
+  const rock = useSelector((state) => state.searchMain.rock);
+  const pop = useSelector((state) => state.searchMain.pop);
+  const hipHop = useSelector((state) => state.searchMain.hipHop);
   const rockArtists = [
     "queen",
     "u2",
@@ -37,12 +42,13 @@ const MyMain = () => {
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
-          rockArtists[3]
+          rockArtists[1]
       ); // gets the information
 
       if (response.ok) {
         const result = await response.json(); // transforms the response to json
-        dispatch(getRockAction(result));
+        console.log("fetchRockArtists", result);
+        dispatch(getRockAction(result.data));
       }
     } catch (err) {
       console.log(err);
@@ -57,8 +63,10 @@ const MyMain = () => {
       ); // gets the information
 
       if (response.ok) {
-        const result = await response.json(); // transforms the response to json
-        dispatch(getPopAction(result));
+        const result = await response.json(); // transforms the response to
+        console.log("fetchPopArtists", result);
+
+        dispatch(getPopAction(result.data));
       }
     } catch (err) {
       console.log(err);
@@ -74,17 +82,20 @@ const MyMain = () => {
 
       if (response.ok) {
         const result = await response.json(); // transforms the response to json
-        dispatch(getHipHopAction(result));
+        console.log("fetchHipHopArtists", result);
+
+        dispatch(getHipHopAction(result.data));
       }
     } catch (err) {
       console.log(err);
     }
   };
-  // useEffect(()=>{
-  //   fetchRockArtists(),
-  //   fetchPopArtists(),
-  //   fetchHipHopArtists(),
-  // },[])
+  useEffect(() => {
+    fetchRockArtists();
+    fetchPopArtists();
+    fetchHipHopArtists();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="col-12 col-md-9 offset-md-3 mainPage">
       <div className="row">
@@ -103,7 +114,22 @@ const MyMain = () => {
             <div
               className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
               id="rockSection"
-            ></div>
+            >
+              {rock.length === 0 ? (
+                <Spinner animation="border" variant="light">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                rock
+                  .filter((elem) => rock.indexOf(elem) < 4)
+                  .map((songInfo) => (
+                    <SongInfoPage
+                      songInfo={songInfo}
+                      key={`song-${songInfo.id}`}
+                    />
+                  ))
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -114,7 +140,22 @@ const MyMain = () => {
             <div
               className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
               id="popSection"
-            ></div>
+            >
+              {pop.length === 0 ? (
+                <Spinner animation="border" variant="light">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                pop
+                  .filter((elem) => pop.indexOf(elem) < 4)
+                  .map((songInfo) => (
+                    <SongInfoPage
+                      songInfo={songInfo}
+                      key={`song-${songInfo.id}`}
+                    />
+                  ))
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -125,7 +166,22 @@ const MyMain = () => {
             <div
               className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
               id="hipHopSection"
-            ></div>
+            >
+              {hipHop.length === 0 ? (
+                <Spinner animation="border" variant="light">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                hipHop
+                  .filter((elem) => hipHop.indexOf(elem) < 4)
+                  .map((songInfo) => (
+                    <SongInfoPage
+                      songInfo={songInfo}
+                      key={`song-${songInfo.id}`}
+                    />
+                  ))
+              )}
+            </div>
           </div>
         </div>
       </div>

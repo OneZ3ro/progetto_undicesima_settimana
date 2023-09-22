@@ -23,7 +23,7 @@ const searchMainReducer = (state = initialState, action) => {
     case GET_HIPHOP:
       return {
         ...state,
-        hiphop: action.payload,
+        hipHop: action.payload,
       };
 
     default:
